@@ -6,6 +6,7 @@ import {inputValidationMiddleware} from "../middlewares/input-validation-middlew
 export const bloggersRouter = Router({});
 
 const bloggerNameValidation = body('name')
+    .trim()
     .isLength({max: 15})
     .withMessage("maximum 15 characters")
     .notEmpty()
@@ -13,9 +14,7 @@ const bloggerNameValidation = body('name')
 
 const youtubeUrlValidation = body('youtubeUrl')
     .isLength({max: 100})
-    .withMessage("maximum 20 characters")
-    .notEmpty()
-    .withMessage("must not be empty")
+    .withMessage("maximum 100 characters")
     .matches(/^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$/)
     .withMessage("link is incorrect")
 

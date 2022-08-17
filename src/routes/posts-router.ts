@@ -7,6 +7,7 @@ import {bloggersRepository} from "../repositories/bloggers-repository";
 export const postsRouter = Router({});
 
 const postTitleValidation = body('title')
+    .trim()
     .isLength({max: 30})
     .withMessage("maximum 30 characters")
     .notEmpty()
@@ -19,6 +20,7 @@ const postDescriptionValidation = body('shortDescription')
     .withMessage("must not be empty");
 
 const postContentValidation = body('content')
+    .trim()
     .isLength({max: 1000})
     .withMessage("maximum 1000 characters")
     .notEmpty()
