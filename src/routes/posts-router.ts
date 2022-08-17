@@ -2,7 +2,7 @@ import {Request, Response, Router} from "express";
 import {postsRepository} from "../repositories/posts-repository";
 import {body} from "express-validator";
 import {inputValidationMiddleware} from "../middlewares/input-validation-middleware";
-import {bloggersRepository} from "../repositories/bloggers-repository";
+import {isBloggerMiddleware} from "../middlewares/is-bloger-middleware";
 
 export const postsRouter = Router({});
 
@@ -67,14 +67,10 @@ postsRouter.post('/',
     postContentValidation,
     postDescriptionValidation,
     inputValidationMiddleware,
+    isBloggerMiddleware,
     (req: Request, res: Response) => {
-    const isBlogger = bloggersRepository.isBloggerById(req.body.bloggerId)
-    if(!isBlogger) {
-        res.send(400);
-        return
-    }
 
-    const newPostId = postsRepository.createPost(req.body.title, req.body.shortDescription, req.body.content, isBlogger.id, isBlogger.name);
+    const newPostId = postsRepository.createPost(req.body.title, req.body.shortDescription, req.body.content, req.body.bloggerId, req.body.bloggerName);
 
     if(!newPostId) {
         res.send(400);
@@ -98,14 +94,11 @@ postsRouter.put('/:id',
     postContentValidation,
     postDescriptionValidation,
     inputValidationMiddleware,
+    isBloggerMiddleware,
     (req: Request, res: Response) => {
-    const isBlogger = bloggersRepository.isBloggerById(req.body.bloggerId)
-    if(!isBlogger) {
-        res.send(404);
-        return
-    }
 
-    const isUpdated = postsRepository.updatePost(+req.params.id, req.body.title, req.body.shortDescription, req.body.content, isBlogger.id, isBlogger.name);
+    const isUpdated = postsRepository.updatePost(+req.params.id, req.body.title, req.body.shortDescription, req.body.content, req.body.bloggerId, req.body.bloggerName);
+
     if(isUpdated) {
         res.send(204);
         return;
