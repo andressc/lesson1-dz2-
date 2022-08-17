@@ -85,9 +85,6 @@ postsRouter.post('/',
     res.send(400);
 });
 
-postsRouter.put('/', (req: Request, res: Response) => {
-        res.send(404);
-})
 postsRouter.put('/:id',
     postTitleValidation,
     postBloggerIdValidation,
