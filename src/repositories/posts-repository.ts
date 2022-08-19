@@ -1,6 +1,7 @@
 import {PostsType} from "../types/postsType";
+import {posts} from "../localDB/localDB";
 
-const posts: PostsType[] = [
+/*const posts: PostsType[] = [
     {
         id: 0,
         title: 'hello',
@@ -9,7 +10,7 @@ const posts: PostsType[] = [
         bloggerId: 1,
         bloggerName: 'IT-INCUBATOR'
     }
-];
+];*/
 
 export const postsRepository = {
     async findAllPosts(): Promise<PostsType[]> {

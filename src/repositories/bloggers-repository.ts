@@ -1,10 +1,11 @@
 import {BloggersType} from "../types/bloggersType";
+import {bloggers} from "../localDB/localDB";
 
-const bloggers: BloggersType[] = [
+/*const bloggers: BloggersType[] = [
     {id: 1, name: 'IT-INCUBATOR', youtubeUrl: 'https://www.youtube.com/c/ITINCUBATOR'},
     {id: 2, name: 'IT-KAMASUTRA', youtubeUrl: 'https://www.youtube.com/c/ITKAMASUTRA'},
     {id: 3, name: 'Blogger', youtubeUrl: 'https://www.youtube.com/c/ergegerger'},
-];
+];*/
 
 export const bloggersRepository = {
     async findAllBloggers(): Promise<BloggersType[]> {
