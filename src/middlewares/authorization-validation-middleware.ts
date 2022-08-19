@@ -3,7 +3,7 @@ import {NextFunction} from "express";
 
 export const authorizationValidationMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
-    const auth = req.header('authorization');
+    const auth = req.header('Authorization');
 
     if (!auth) {
         res.send(401);
