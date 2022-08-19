@@ -1,19 +1,27 @@
-const bloggers = [
+import {BloggersType} from "../types/bloggersType";
+
+const bloggers: BloggersType[] = [
     {id: 1, name: 'IT-INCUBATOR', youtubeUrl: 'https://www.youtube.com/c/ITINCUBATOR'},
     {id: 2, name: 'IT-KAMASUTRA', youtubeUrl: 'https://www.youtube.com/c/ITKAMASUTRA'},
     {id: 3, name: 'Blogger', youtubeUrl: 'https://www.youtube.com/c/ergegerger'},
 ];
 
 export const bloggersRepository = {
-    findAllBloggers() {
+    async findAllBloggers(): Promise<BloggersType[]> {
         return bloggers;
     },
 
-    findBloggerById(id: number) {
-        return bloggers.filter(v => v.id === id);
+    async findBloggerById(id: number): Promise<BloggersType | null>  {
+        const [blogger] = bloggers.filter(v => v.id === id);
+
+        if(blogger) {
+            return blogger
+        }
+
+        return null
     },
 
-    isBloggerById(id: number) {
+    async isBloggerById(id: number): Promise<BloggersType | false> {
         const blogger = bloggers.find(v => v.id === id);
         if(blogger) {
             return blogger
@@ -22,7 +30,7 @@ export const bloggersRepository = {
         return false
     },
 
-    deleteBlogger(id: number) {
+    async deleteBlogger(id: number): Promise<boolean> {
         for(let i=0; i< bloggers.length; i++) {
             if(bloggers[i].id === id) {
                 bloggers.splice(i, 1);
@@ -33,7 +41,7 @@ export const bloggersRepository = {
         return false;
     },
 
-    updateBlogger(id: number, name: string, youtubeUrl: string) {
+    async updateBlogger(id: number, name: string, youtubeUrl: string): Promise<boolean> {
         const blogger = bloggers.find(v => v.id === id);
         if(blogger) {
             blogger.name = name;
@@ -44,7 +52,7 @@ export const bloggersRepository = {
         return false;
     },
 
-    createBlogger(name: string, youtubeUrl: string) {
+    async createBlogger(name: string, youtubeUrl: string): Promise<number> {
         const newBlogger = {
             id: +(new Date()),
             name,
