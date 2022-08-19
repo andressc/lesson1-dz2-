@@ -46,9 +46,9 @@ postsRouter.delete('/:id',
 });
 
 postsRouter.post('/',
-    authorizationValidationMiddleware,
     ...postsValidationMiddleware,
     errorValidationMiddleware,
+    authorizationValidationMiddleware,
     isBloggerMiddleware,
     async (req: Request, res: Response) => {
 
@@ -68,9 +68,9 @@ postsRouter.post('/',
 });
 
 postsRouter.put('/:id',
-    authorizationValidationMiddleware,
     ...postsValidationMiddleware,
     errorValidationMiddleware,
+    authorizationValidationMiddleware,
     isBloggerMiddleware,
     async (req: Request, res: Response) => {
 

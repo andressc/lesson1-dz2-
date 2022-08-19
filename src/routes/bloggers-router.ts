@@ -42,9 +42,9 @@ bloggersRouter.delete('/:id',
 });
 
 bloggersRouter.post('/',
-    authorizationValidationMiddleware,
     ...bloggersValidationMiddleware,
     errorValidationMiddleware,
+    authorizationValidationMiddleware,
     async (req: Request, res: Response) => {
     const newBloggerId: number = await bloggersRepository.createBlogger(req.body.name, req.body.youtubeUrl);
     const testNewBlogger: BloggersType | null = await bloggersRepository.findBloggerById(newBloggerId);
@@ -61,9 +61,9 @@ bloggersRouter.post('/',
 })*/
 
 bloggersRouter.put('/:id',
-    authorizationValidationMiddleware,
     ...bloggersValidationMiddleware,
     errorValidationMiddleware,
+    authorizationValidationMiddleware,
     async (req: Request, res: Response) => {
     const isUpdated: boolean = await bloggersRepository.updateBlogger(+req.params.id, req.body.name, req.body.youtubeUrl);
     if(isUpdated) {
