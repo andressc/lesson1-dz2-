@@ -1,4 +1,5 @@
 import {body} from "express-validator";
+import {bloggersRepository} from "../repositories/bloggers-repository";
 
 export const postsValidationMiddleware = [
     body('title')
@@ -26,4 +27,11 @@ export const postsValidationMiddleware = [
         .withMessage("field must be a number")
         .notEmpty()
         .withMessage("must not be empty")
+        .custom(async (value) => {
+            const blogger = await bloggersRepository.findBloggerById(value);
+            if (!blogger) {
+                throw new Error('Blogger with that ID is not exists!');
+            }
+            return true;
+        })
 ]
