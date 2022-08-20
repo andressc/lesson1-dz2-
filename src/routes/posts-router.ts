@@ -32,7 +32,7 @@ postsRouter.get('/:id',
 });*/
 
 postsRouter.delete('/:id',
-    //authorizationValidationMiddleware,
+    authorizationValidationMiddleware,
     async (req: Request, res: Response) => {
     const isDeleted: boolean = await postsRepository.deletePost(+req.params.id)
 
@@ -45,7 +45,7 @@ postsRouter.delete('/:id',
 });
 
 postsRouter.post('/',
-    //authorizationValidationMiddleware,
+    authorizationValidationMiddleware,
     ...postsValidationMiddleware,
     errorValidationMiddleware,
     async (req: Request, res: Response) => {
@@ -66,7 +66,7 @@ postsRouter.post('/',
 });
 
 postsRouter.put('/:id',
-    //authorizationValidationMiddleware,
+    authorizationValidationMiddleware,
     ...postsValidationMiddleware,
     errorValidationMiddleware,
     async (req: Request, res: Response) => {
