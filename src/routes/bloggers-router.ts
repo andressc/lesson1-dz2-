@@ -30,7 +30,7 @@ bloggersRouter.get('/:id', async (req: Request, res: Response) => {
 });*/
 
 bloggersRouter.delete('/:id',
-    authorizationValidationMiddleware,
+    //authorizationValidationMiddleware,
     async (req: Request, res: Response) => {
     const isDeleted: boolean = await bloggersRepository.deleteBlogger(+req.params.id)
     if(isDeleted) {
@@ -42,7 +42,7 @@ bloggersRouter.delete('/:id',
 });
 
 bloggersRouter.post('/',
-    authorizationValidationMiddleware,
+    //authorizationValidationMiddleware,
     ...bloggersValidationMiddleware,
     errorValidationMiddleware,
     async (req: Request, res: Response) => {
@@ -61,7 +61,7 @@ bloggersRouter.post('/',
 })*/
 
 bloggersRouter.put('/:id',
-    authorizationValidationMiddleware,
+    //authorizationValidationMiddleware,
     ...bloggersValidationMiddleware,
     errorValidationMiddleware,
     async (req: Request, res: Response) => {
